@@ -30,7 +30,21 @@ public class Main {
         bank.addAccount(acc2);
         bank.addAccount(savings);
         bank.processMonthEnd();
-        
+
         bank.printAuditLog(); // Laporan aoudit bank
+
+        try {
+            Account found = bank.findAccount("A001");
+            System.out.println("Found account: " + found.getAccountNumber());
+        } catch (AccountNotFoundException e) {
+            System.out.println("Find failed: " + e.getMessage());
+        }
+
+        try {
+            Account notFound = bank.findAccount("X999");
+            System.out.println("Found account: " + notFound.getAccountNumber());
+        } catch (AccountNotFoundException e) {
+            System.out.println("Find failed: " + e.getMessage());
+        }
     }
 }
