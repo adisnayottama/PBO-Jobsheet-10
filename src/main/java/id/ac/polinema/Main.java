@@ -12,12 +12,15 @@ public class Main {
         Customer customer = new Customer("Rian", "0812-0000-0003");
         SavingsAccount savings = new SavingsAccount("A003", customer, 100000, 0.02);
 
+        // try/catch untuk menangani exception saat penarikan saldo
+        // uji coba penarikan pertama (gagal karena melanggar batas saldo minimum)
         try {
             savings.withdraw(70000);
         } catch (InsufficientBalanceException e) {
             System.out.println("Withdrawal failed: " + e.getMessage());
         }
         
+        // uji coba penarikan kedua (berhasil karena sisa saldo mencukupi)
         try {
             savings.withdraw(30000);
             System.out.println("Withdrawal succeeded, new balance: " + savings.getBalance());
@@ -29,10 +32,13 @@ public class Main {
         bank.addAccount(acc1);
         bank.addAccount(acc2);
         bank.addAccount(savings);
-        bank.processMonthEnd();
-
+        bank.processMonthEnd(); //pemrosesan akhir bulan untuk seluruh rekening di bank
+    
+        //Tugas 1
         bank.printAuditLog(); // Laporan aoudit bank
 
+        // Tugas 2
+        // uji coba mencari rekening yang ada
         try {
             Account found = bank.findAccount("A001");
             System.out.println("Found account: " + found.getAccountNumber());
@@ -40,6 +46,7 @@ public class Main {
             System.out.println("Find failed: " + e.getMessage());
         }
 
+        // uji coba mencari rekening yang tidak ada
         try {
             Account notFound = bank.findAccount("X999");
             System.out.println("Found account: " + notFound.getAccountNumber());

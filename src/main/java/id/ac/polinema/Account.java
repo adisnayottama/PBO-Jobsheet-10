@@ -1,5 +1,5 @@
 package id.ac.polinema;
-// Ubah kelas menjadi abstrak
+// ubah kelas menjadi abstrak
 public abstract class Account {
     private String accountNumber;
     private Customer owner;
@@ -32,16 +32,18 @@ public abstract class Account {
     }
 
     public boolean deposit(double amount, String note) {
-        // Memanggil method deposit(double) yang sudah ada terlebih dahulu
+        // memanggil method deposit(double) yang sudah ada terlebih dahulu
         if (!deposit(amount)) {
             return false;
         }
-        // Jika penyetoran berhasil, cetak catatan transaksi
+        // jika penyetoran berhasil, cetak catatan transaksi
         System.out.println(accountNumber + " deposit note: " + note);
         return true;
     }
 
+    // mengubah return type withdraw() menjadi void dan menambahkan throws InsufficientBalanceException
     public void withdraw(double amount) throws InsufficientBalanceException {
+        // validasi saldo minimum dan melempar exception jika gagal
         if (!canWithdraw(amount)) {
             throw new InsufficientBalanceException(
                 accountNumber + ": insufficent balance for a withdrawal of " + amount);
@@ -56,6 +58,6 @@ public abstract class Account {
     public void printInfo() {
         System.out.println(accountNumber + " - " + owner.getName() + " - " + " balance: " + balance);
     }
-    // Menambahkan method abtrak
+    // menambahkan method abtrak
     public abstract double monthlyFee();
 }
